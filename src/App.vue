@@ -1,0 +1,57 @@
+<template lang='pug'>
+  #app
+    navbar
+    .container
+      router-view
+    footersection
+</template>
+
+
+
+<script>
+import navbar from './components/Navbar'
+import footersection from './components/Footer'
+
+export default {
+  components: {
+    navbar,
+    footersection
+  }
+}
+</script>
+
+<style>
+#app {
+  font-family: 'Raleway', 'Source Sans Pro',  Helvetica, Arial, sans-serif;
+  font-size:16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #2c3e50;
+  margin-top: 60px;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
+}
+
+.container {
+  width:900px;
+  max-width:95%;
+}
+
+h1, h2 {
+  text-align: center
+}
+
+h1 {
+  margin-bottom:1.5em
+}
+.router-link-active {
+    color: "black";
+}
+</style>
