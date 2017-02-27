@@ -4,15 +4,17 @@
 div
   h1 Images Annotator
   h3.text-center Label your images, get a summary spreadsheet
-  label.btn.btn-default.btn-file.center-block(style={width: '200px'})
-    | Select some pictures
-    input(type="file" class="hidden" multiple=1 @change='changeImages' class="file" name="files")
+  //- label.btn.btn-default.btn-file.center-block(style={width: '200px'})
+  //-   | Select some pictures
+  //- input(type="file" class="hidden" multiple=1 @change='changeImages' class="file" name="files")
+  fileuploader(v-model='images')
   .diaporama(v-if='images.length')
     div(v-for='image, i in images', :key='i' v-if='i === index')
       h4.text-center {{i+1}}/{{images.length}} : {{image.name}}
       .images-div
         span.helper
-        img(:src='image.content')
+          .container
+            img(:src='image.content')
       input.center-block(v-model='image.annotation',
                             @keydown.enter='changeIndex(index + 1)',
                             @keydown.ctrl.space='changeIndex(index - 1)',
@@ -20,12 +22,12 @@ div
                             :ref="'current'")
       .infos Press <b>Enter</b> for the next picture, <b>Ctrl+Space</b> for the previous picture
     .btn.btn-default.center-block(style={width: '150px'} @click='getSummary') Get summary
-
 </template>
 
 <script>
 import Vue from 'vue'
 import download from 'downloadjs'
+import fileuploader from './widgets/FileUploader'
 export default {
   data () {
     return {
@@ -72,6 +74,14 @@ export default {
       }).join('\n')
       download(content, 'annotations.txt', 'text/csv')
     }
+  },
+  components: {
+    fileuploader
+  },
+  watch: {
+    images: function (val) {
+      console.log(val)
+    }
   }
 }
 </script>
@@ -88,12 +98,16 @@ h3 {
   text-align: center;
 }
 
-.images-div img {
-  max-width: 90%;
-  max-height: 300px;
-  margin-top: 20px;
-  margin-bottom: 20px;
+.images-div .container {
+  width: 90%;
+  margin: 20px auto;
+  resize: both;
+  overflow: auto;
+}
+.images-div .container img {
+  width: 90%;
   border: 2px solid black;
+
 }
 
 .helper {
@@ -112,11 +126,12 @@ input {
 }
 
 .diaporama {
-  width: 80%;
-  margin-left: 10%;
+  max-width: 80%;
+  margin: 0 auto;
   padding: 20px 30px 20px 30px;
   background-color: #f7f9fc;
   margin-top: 20px;
-  margin-bottom: 20px
+  margin-bottom: 20px;
+
 }
 </style>

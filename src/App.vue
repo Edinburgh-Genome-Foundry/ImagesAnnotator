@@ -37,21 +37,18 @@ html {
 body {
   /* Margin bottom by footer height */
   margin-bottom: 60px;
+  width: 800px;
+  max-width: 90%;
+  margin: 0 auto;
 }
 
-.container {
-  width:900px;
-  max-width:95%;
-}
-
-h1, h2 {
-  text-align: center
+h1, h2, h3 {
+  text-align: center;
+  font-weight: normal;
 }
 
 h1 {
-  margin-bottom:1.5em
-}
-.router-link-active {
-    color: "black";
+  margin-bottom:1.5em;
+  font-size: 3em;
 }
 </style>
